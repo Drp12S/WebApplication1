@@ -1,0 +1,40 @@
+﻿@model WebApplication1.Models.Category
+
+@{
+    ViewBag.Title = "Xóa danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="max-width: 600px;">
+    <h2 style="color: #333; font-weight: bold; margin-bottom: 20px;">Xóa danh mục</h2>
+
+    <div style="background-color: #fff; padding: 25px; border-radius: 6px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+
+
+        <div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px 15px; border-radius: 4px; margin-bottom: 20px;">
+            <strong>Cảnh báo:</strong> Bạn có chắc chắn muốn xóa danh mục này? Hành động này không thể hoàn tác!
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <span style="color: #666; font-size: 14px;">Tên danh mục:</span>
+            <div style="font-size: 18px; font-weight: bold; color: #333; margin-top: 5px;">
+                @Html.DisplayFor(model => model.CategoryName)
+            </div>
+        </div>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;" />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+
+                <input type="submit" value="Xác nhận Xóa" class="btn btn-danger" style="font-weight: bold; padding: 6px 20px;" />
+
+
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn", @style = "background-color: #cce5ff; border: 1px solid #b8daff; color: #000; font-weight: 500; padding: 6px 16px;" })
+            </div>
+        }
+    </div>
+</div>

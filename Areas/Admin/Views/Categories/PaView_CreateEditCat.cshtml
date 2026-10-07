@@ -1,0 +1,17 @@
+﻿@model WebApplication1.Models.Category
+
+<div style="background-color: #fff; padding: 25px; border-radius: 6px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05); max-width: 600px;">
+    <div class="form-group" style="margin-bottom: 20px;">
+        @Html.LabelFor(model => model.CategoryName, "Tên danh mục", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 8px; display: block; color: #333;" })
+        @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên danh mục...", @style = "max-width: 100%; border-radius: 4px;" } })
+        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center; margin-top: 25px;">
+
+        <input type="submit" value="Lưu dữ liệu" class="btn btn-success" style="font-weight: bold; padding: 6px 20px;" />
+
+
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn", @style = "background-color: #cce5ff; border: 1px solid #b8daff; color: #000; font-weight: 500; padding: 6px 16px;" })
+    </div>
+</div>
