@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int stt = 1;
+}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="margin: 0; color: #333; font-weight: bold;">Danh sách sản phẩm</h2>
+    @Html.ActionLink("+ Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-success", @style = "font-weight: bold;" })
+</div>
+
+<table class="table table-bordered table-hover" style="background-color: #ffffff; border: 1px solid #000000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); width: 100%;">
+    <!--Thanh tiêu đề-->
+    <thead style="background-color: #b0b5b9; color: #000000;">
+        <tr>
+            <th style="width: 50px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">STT</th>
+            <th style="width: 90px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Hình ảnh</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Tên sản phẩm</th>
+            <th style="width: 110px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Đơn giá</th>
+            <th style="width: 150px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Mô tả</th>
+            <th style="width: 120px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Danh mục</th>
+            <th style="width: 220px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="7" class="text-center" style="padding: 30px; color: #888; border: 1px solid #000000;">
+                    <em>Hiện chưa có sản phẩm nào. Hãy bấm nút <b>"+ Thêm sản phẩm mới"</b> ở trên để tạo nhé!</em>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <!--STT -->
+                    <td style="text-align: center; vertical-align: middle; font-weight: bold; color: #333; border: 1px solid #000000;">
+                        @(stt++)
+                    </td>
+
+                    <!--Ảnh sản phẩm -->
+                    <td style="text-align: center; vertical-align: middle; border: 1px solid #000000;">
+                        @if (!string.IsNullOrEmpty(item.ProductImage))
+                        {
+                            <img src="@Url.Content(item.ProductImage)" alt="@item.ProductName" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #999;" />
+                        }
+                        else
+                        {
+                            <span style="font-size: 11px; color: #888;">(Không ảnh)</span>
+                        }
+                    </td>
+
+                    <!--Tên sản phẩm -->
+                    <td style="vertical-align: middle; font-weight: bold; color: #333; border: 1px solid #000000;">
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+
+                    <!--Đơn giá-->
+                    <td style="vertical-align: middle; text-align: right; color: #d9534f; font-weight: bold; border: 1px solid #000000;">
+                        @string.Format("{0:N0} đ", item.ProductPrice)
+                    </td>
+
+                    <!--Mô tả-->
+                    <td style="vertical-align: middle; color: #555; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid #000000;">
+                        @Html.DisplayFor(modelItem => item.ProductDescription)
+                    </td>
+
+                    <!--Tên danh mục-->
+                    <td style="text-align: center; vertical-align: middle; border: 1px solid #000000;">
+                        <span style="font-size: 12px; padding: 4px 8px; border-radius: 3px; background-color: #e2e3e5; color: #383d41; border: 1px solid #ccc; display: inline-block;">
+                            @(item.Category != null ? item.Category.CategoryName : "Chưa phân loại")
+                        </span>
+                    </td>
+
+                    <!--Các nút thao tác-->
+                    <td style="text-align: center; vertical-align: middle; white-space: nowrap; border: 1px solid #000000;">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-warning btn-sm", @style = "margin-right: 4px;" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm", @style = "margin-right: 4px;" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,75 @@
+﻿@model WebApplication1.Models.Product
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="max-width: 700px;">
+    <h2 style="color: #333; font-weight: bold; margin-bottom: 20px;">Chi tiết sản phẩm</h2>
+
+    <div style="background-color: #fff; padding: 25px; border-radius: 6px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+
+        <!--Khung hiển thị ảnh sản phẩm-->
+        <div style="text-align: center; margin-bottom: 25px;">
+            @if (!string.IsNullOrEmpty(Model.ProductImage))
+            {
+                <img src="@Url.Content(Model.ProductImage)" alt="@Model.ProductName" style="max-width: 250px; max-height: 250px; object-fit: contain; border-radius: 6px; border: 1px solid #e0e0e0; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" />
+            }
+            else
+            {
+                <div style="display: inline-block; padding: 25px 40px; background-color: #f8f9fa; border: 1px dashed #ccc; border-radius: 6px; color: #888;">
+                    <span>(Sản phẩm chưa có hình ảnh)</span>
+                </div>
+            }
+        </div>
+
+        <!--Bảng thông tin chi tiết-->
+        <table class="table" style="margin-bottom: 20px;">
+            <tr>
+                <td style="width: 160px; font-weight: bold; color: #666; border-top: none;">Tên sản phẩm:</td>
+                <td style="font-size: 16px; font-weight: bold; color: #333; border-top: none;">
+                    @Html.DisplayFor(model => model.ProductName)
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; color: #666;">Thuộc danh mục:</td>
+                <td>
+                    <span style="font-size: 13px; padding: 4px 10px; border-radius: 3px; background-color: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; display: inline-block;">
+                        @(Model.Category != null ? Model.Category.CategoryName : "Chưa phân loại")
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; color: #666;">Đơn giá:</td>
+                <td style="font-size: 18px; font-weight: bold; color: #d9534f;">
+                    @string.Format("{0:N0} đ", Model.ProductPrice)
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; color: #666;">Mô tả sản phẩm:</td>
+                <td style="color: #444; line-height: 1.6;">
+                    @(string.IsNullOrEmpty(Model.ProductDescription) ? "(Không có mô tả)" : Model.ProductDescription)
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; color: #666;">Tên file ảnh:</td>
+                <td style="color: #777; font-size: 13px;">
+                    @(string.IsNullOrEmpty(Model.ProductImage) ? "(Trống)" : Model.ProductImage)
+                </td>
+            </tr>
+        </table>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;" />
+
+        <!--Các nút thao tác-->
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <!--Nút Sửa-->
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ProductID }, new { @class = "btn btn-warning", @style = "font-weight: bold; padding: 6px 20px;" })
+
+            <!--Nút Quay lại-->
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn", @style = "background-color: #cce5ff; border: 1px solid #b8daff; color: #000; font-weight: 500; padding: 6px 16px;" })
+        </div>
+
+    </div>
+</div>

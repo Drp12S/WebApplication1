@@ -1,0 +1,48 @@
+﻿@model WebApplication1.Models.Product
+
+<div style="background-color: #fff; padding: 25px; border-radius: 6px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05); max-width: 700px;">
+
+    <div class="form-group" style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.CategoryID, "Danh mục sản phẩm", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 6px; display: block;" })
+        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control", @style = "max-width: 100%; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Tên Sản phẩm -->
+    <div class="form-group" style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.ProductName, "Tên sản phẩm", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 6px; display: block;" })
+        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên sản phẩm...", @style = "max-width: 100%; border-radius: 4px;" } })
+        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Mô tả Sản phẩm -->
+    <div class="form-group" style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.ProductDescription, "Mô tả sản phẩm", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 6px; display: block;" })
+        @Html.TextAreaFor(model => model.ProductDescription, new { @class = "form-control", @rows = 3, @placeholder = "Nhập mô tả sản phẩm...", @style = "max-width: 100%; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Đơn giá -->
+    <div class="form-group" style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.ProductPrice, "Đơn giá (VNĐ)", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 6px; display: block;" })
+        @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập giá bán...", @style = "max-width: 100%; border-radius: 4px;" } })
+        @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Đường dẫn hình ảnh -->
+    <div class="form-group" style="margin-bottom: 20px;">
+        @Html.LabelFor(model => model.ProductImage, "Hình ảnh sản phẩm", htmlAttributes: new { @class = "control-label", @style = "font-weight: bold; margin-bottom: 6px; display: block;" })
+        @Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { @class = "form-control", @placeholder = "Đường dẫn ảnh hoặc tên file ảnh...", @style = "max-width: 100%; border-radius: 4px;" } })
+        @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Các nút thao tác -->
+    <div style="display: flex; gap: 10px; align-items: center; margin-top: 25px;">
+        <!--Nút Lưu-->
+        <input type="submit" value="Lưu sản phẩm" class="btn btn-success" style="font-weight: bold; padding: 6px 20px;" />
+
+        <!--Nút Quay lại-->
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn", @style = "background-color: #cce5ff; border: 1px solid #b8daff; color: #000; font-weight: 500; padding: 6px 16px;" })
+    </div>
+
+</div>

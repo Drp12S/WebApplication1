@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Quản lý danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    int stt = 1; 
+    int stt = 1;
 }
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -11,19 +11,20 @@
     @Html.ActionLink("+ Thêm danh mục mới", "Create", null, new { @class = "btn btn-success", @style = "font-weight: bold;" })
 </div>
 
-<table class="table table-bordered table-hover table-striped" style="box-shadow: 0 2px 5px rgba(0,0,0,0.05); background-color: #fff;">
-    <thead style="background-color: #343a40; color: #ffffff;">
+<table class="table table-bordered table-hover" style="background-color: #ffffff; border: 1px solid #000000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); width: 100%;">
+    <!--Thanh tiêu đề-->
+    <thead style="background-color: #b0b5b9; color: #000000;">
         <tr>
-            <th style="width: 80px; text-align: center;">STT</th>
-            <th>Tên danh mục</th>
-            <th style="width: 250px; text-align: center;">Thao tác</th>
+            <th style="width: 50px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">STT</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Tên danh mục</th>
+            <th style="width: 220px; text-align: center; vertical-align: middle; border: 1px solid #000000; white-space: nowrap;">Thao tác</th>
         </tr>
     </thead>
     <tbody>
         @if (!Model.Any())
         {
             <tr>
-                <td colspan="3" class="text-center" style="padding: 30px; color: #888;">
+                <td colspan="3" class="text-center" style="padding: 30px; color: #888; border: 1px solid #000000;">
                     <em>Hiện chưa có danh mục nào. Hãy bấm nút <b>"+ Thêm danh mục mới"</b> ở trên để tạo nhé!</em>
                 </td>
             </tr>
@@ -33,13 +34,18 @@
             foreach (var item in Model)
             {
                 <tr>
-                    <td style="text-align: center; vertical-align: middle; font-weight: bold; color: #666;">
+                    <!--STT-->
+                    <td style="text-align: center; vertical-align: middle; font-weight: bold; color: #333; border: 1px solid #000000;">
                         @(stt++)
                     </td>
-                    <td style="vertical-align: middle; font-size: 15px;">
+
+                    <!--Tên danh mục-->
+                    <td style="vertical-align: middle; font-weight: bold; color: #333; font-size: 15px; border: 1px solid #000000;">
                         @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
-                    <td style="text-align: center; vertical-align: middle;">
+
+                    <!--Cụm nút thao tác-->
+                    <td style="text-align: center; vertical-align: middle; white-space: nowrap; border: 1px solid #000000;">
                         @Html.ActionLink("Sửa", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-warning btn-sm", @style = "margin-right: 4px;" })
                         @Html.ActionLink("Chi tiết", "Details", new { id = item.CategoryID }, new { @class = "btn btn-info btn-sm", @style = "margin-right: 4px;" })
                         @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-danger btn-sm" })

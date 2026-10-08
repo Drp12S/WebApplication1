@@ -1,0 +1,23 @@
+﻿@model WebApplication1.Models.Product
+
+@{
+    ViewBag.Title = "Thêm sản phẩm mới";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="max-width: 700px;">
+    <h2 style="color: #333; font-weight: bold; margin-bottom: 20px;">Thêm sản phẩm mới</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.Partial("PaView_CreateEditPro", Model)
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
